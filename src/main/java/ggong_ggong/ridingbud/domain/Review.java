@@ -24,5 +24,12 @@ public class Review {
     private String content;
     private LocalDateTime createdTime;
 
-    // TODO: public static factory() 작성
+    public static Review from(CreateReviewCommand command) {
+        return Review.builder()
+                .courseId(command.getCourseId())
+                .userId(command.getUserId())
+                .content(command.getContent())
+                .createdTime(command.getCreatedTime())
+                .build();
+    }
 }
