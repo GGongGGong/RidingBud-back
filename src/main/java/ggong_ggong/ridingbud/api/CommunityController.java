@@ -1,7 +1,9 @@
 package ggong_ggong.ridingbud.api;
 
 import ggong_ggong.ridingbud.api.req.CreateReviewRequest;
+import ggong_ggong.ridingbud.api.req.RecommendReviewRequest;
 import ggong_ggong.ridingbud.application.CreateReviewCommand;
+import ggong_ggong.ridingbud.application.RecommendReviewCommand;
 import ggong_ggong.ridingbud.application.ReviewService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -22,7 +24,7 @@ public class CommunityController {
 
     @PostMapping("/review")
     public ResponseEntity<?> enrollReview(@RequestBody CreateReviewRequest request) {
-        // TODO: AccessToken에서 UserID 빼오는 코드 작성
+        // TODO: AccessToken 에서 UserID 빼오는 코드 작성
         Long userId = 1L;
 
         reviewService.enrollReview(
@@ -30,6 +32,22 @@ public class CommunityController {
                         .courseId(request.getCourseId())
                         .userId(userId)
                         .content(request.getContent())
+                        .createdTime(LocalDateTime.now())
+                        .build()
+        );
+
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @PostMapping("/reviews/recommendations")
+    public ResponseEntity<?> recommendReview(@RequestBody RecommendReviewRequest request) {
+        // TODO: AccessToken 에서 UserID 빼오는 코드 작성
+        Long userId = 1L;
+
+        reviewService.recommendReview(
+                RecommendReviewCommand.builder()
+                        .userId(userId)
+                        .reviewId(request.getReviewId())
                         .createdTime(LocalDateTime.now())
                         .build()
         );
