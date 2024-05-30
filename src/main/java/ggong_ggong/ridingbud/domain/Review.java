@@ -1,5 +1,6 @@
 package ggong_ggong.ridingbud.domain;
 
+import ggong_ggong.ridingbud.application.CreateReviewCommand;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
