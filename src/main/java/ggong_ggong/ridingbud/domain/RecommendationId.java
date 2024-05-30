@@ -15,7 +15,6 @@ import java.io.Serializable;
 @Getter
 public class RecommendationId implements Serializable {
 
-    // TODO: Long -> Entity class
     private Long userId;
 
     private Long reviewId;
