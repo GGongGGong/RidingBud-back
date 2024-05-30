@@ -1,3 +1,5 @@
+package ggong_ggong.ridingbud;
+
 import jakarta.validation.*;
 
 import java.util.Set;
