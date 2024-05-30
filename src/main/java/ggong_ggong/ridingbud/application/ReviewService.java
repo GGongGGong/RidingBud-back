@@ -7,6 +7,8 @@ import ggong_ggong.ridingbud.persistence.ReviewRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class ReviewService {
@@ -21,6 +23,12 @@ public class ReviewService {
     }
 
     public void recommendReview(RecommendReviewCommand command) {
+        Optional<Review> targetReview = reviewRepository.findById(command.getReviewId());
+        if (targetReview.isEmpty())
+            throw new RuntimeException("존재하지 않는 리뷰입니다.");
+        if (targetReview.get().getUserId().equals(command.getUserId()))
+            throw new RuntimeException("자신의 리뷰는 추천할 수 없습니다.");
+
         Recommendation recommendation = Recommendation.from(command);
 
         recommendationRepository.save(recommendation);
