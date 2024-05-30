@@ -1,5 +1,6 @@
 package ggong_ggong.ridingbud.domain;
 
+import ggong_ggong.ridingbud.application.CreateReviewCommand;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,11 +19,19 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long reviewId;
 
+    // TODO: ORM
     private Long courseId;
     private Long userId;
 
     private String content;
     private LocalDateTime createdTime;
 
-    // TODO: public static factory() 작성
+    public static Review from(CreateReviewCommand command) {
+        return Review.builder()
+                .courseId(command.getCourseId())
+                .userId(command.getUserId())
+                .content(command.getContent())
+                .createdTime(command.getCreatedTime())
+                .build();
+    }
 }
