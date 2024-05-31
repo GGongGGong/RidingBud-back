@@ -45,7 +45,7 @@ public class CommunityController {
     @PostMapping("/reviews/recommendations")
     public ResponseEntity<?> recommendReview(@RequestBody RecommendReviewRequest request) {
         // TODO: AccessToken 에서 UserID 빼오는 코드 작성
-        Long userId = 1L;
+        Long userId = 2L;
 
         reviewService.recommendReview(
                 RecommendReviewCommand.builder()
