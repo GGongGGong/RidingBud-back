@@ -2,6 +2,7 @@ package ggong_ggong.ridingbud.application;
 
 import ggong_ggong.ridingbud.api.res.ReviewDto;
 import ggong_ggong.ridingbud.domain.Recommendation;
+import ggong_ggong.ridingbud.domain.RecommendationId;
 import ggong_ggong.ridingbud.domain.Review;
 import ggong_ggong.ridingbud.persistence.RecommendationRepository;
 import ggong_ggong.ridingbud.persistence.ReviewRepository;
@@ -51,5 +52,13 @@ public class ReviewService {
         Recommendation recommendation = Recommendation.from(command);
 
         recommendationRepository.save(recommendation);
+    }
+
+    public void unrecommendReview(RecommendationId recommendationId) {
+        Optional<Recommendation> recommendation = recommendationRepository.findById(recommendationId);
+        if (recommendation.isEmpty())
+            throw new RuntimeException("존재하지 않는 리뷰입니다.");
+
+        recommendationRepository.delete(recommendation.get());
     }
 }

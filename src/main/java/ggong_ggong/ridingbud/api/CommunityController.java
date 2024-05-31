@@ -7,6 +7,7 @@ import ggong_ggong.ridingbud.api.res.ReviewDto;
 import ggong_ggong.ridingbud.application.CreateReviewCommand;
 import ggong_ggong.ridingbud.application.RecommendReviewCommand;
 import ggong_ggong.ridingbud.application.ReviewService;
+import ggong_ggong.ridingbud.domain.RecommendationId;
 import ggong_ggong.ridingbud.domain.ReviewSortKey;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -72,5 +73,14 @@ public class CommunityController {
             reviewDtos = reviewService.findReviewsByRecommendation(cid);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(FindReviewsResponse.of(reviewDtos));
+    }
+
+    @DeleteMapping("/reviews/recommendations/{recommendation_id}")
+    public ResponseEntity<?> unrecomendReview(@PathVariable Long recommendation_id) {
+
+        reviewService.unrecommendReview(
+                RecommendationId.of(1L, recommendation_id)
+        );
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
