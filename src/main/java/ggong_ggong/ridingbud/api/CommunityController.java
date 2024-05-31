@@ -77,9 +77,11 @@ public class CommunityController {
 
     @DeleteMapping("/reviews/recommendations/{recommendation_id}")
     public ResponseEntity<?> unrecomendReview(@PathVariable Long recommendation_id) {
+        // TODO: AccessToken 에서 UserID 빼오는 코드 작성
+        Long userId = 2L;
 
         reviewService.unrecommendReview(
-                RecommendationId.of(1L, recommendation_id)
+                RecommendationId.of(userId, recommendation_id)
         );
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
