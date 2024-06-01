@@ -1,7 +1,7 @@
 package ggong_ggong.ridingbud.application;
 
 import ggong_ggong.ridingbud.api.res.CourseListResponse;
-import ggong_ggong.ridingbud.api.StopDto;
+import ggong_ggong.ridingbud.api.res.StopDto;
 import ggong_ggong.ridingbud.domain.Course;
 import ggong_ggong.ridingbud.domain.User;
 import ggong_ggong.ridingbud.enums.Level;
@@ -13,7 +13,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
