@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -27,6 +28,11 @@ public class CourseService {
 
     public List<StopDto> getStopsByCourse(Course course){
         return stopRepository.findAllByCourse(course).stream().map(StopDto::new).collect(Collectors.toList());
+    }
+
+    public Course getCourseById(Long courseId) {
+        return courseRepository.findById(courseId)
+                .orElseThrow(() -> new RuntimeException("존재하지 않는 코스입니다."));
     }
 
 }

@@ -4,6 +4,7 @@ import ggong_ggong.ridingbud.api.req.CreateReviewRequest;
 import ggong_ggong.ridingbud.api.req.RecommendReviewRequest;
 import ggong_ggong.ridingbud.api.res.FindReviewsResponse;
 import ggong_ggong.ridingbud.api.res.ReviewDto;
+import ggong_ggong.ridingbud.application.CourseService;
 import ggong_ggong.ridingbud.application.CreateReviewCommand;
 import ggong_ggong.ridingbud.application.RecommendReviewCommand;
 import ggong_ggong.ridingbud.application.ReviewService;
@@ -25,6 +26,7 @@ import java.util.List;
 public class CommunityController {
 
     private final ReviewService reviewService;
+    private final CourseService courseService;
 
     @PostMapping("/reviews")
     public ResponseEntity<?> enrollReview(@RequestBody CreateReviewRequest request) {
@@ -33,7 +35,7 @@ public class CommunityController {
 
         reviewService.enrollReview(
                 CreateReviewCommand.builder()
-                        .courseId(request.getCourseId())
+                        .course(courseService.getCourseById(request.getCourseId()))
                         .userId(userId)
                         .content(request.getContent())
                         .createdTime(LocalDateTime.now())

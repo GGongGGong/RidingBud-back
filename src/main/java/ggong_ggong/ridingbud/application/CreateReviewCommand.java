@@ -1,6 +1,7 @@
 package ggong_ggong.ridingbud.application;
 
 import ggong_ggong.ridingbud.SelfValidating;
+import ggong_ggong.ridingbud.domain.Course;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
@@ -12,7 +13,7 @@ import java.time.LocalDateTime;
 public class CreateReviewCommand extends SelfValidating<CreateReviewCommand> {
 
     @NotNull(message = "코스 ID가 누락되었습니다.")
-    private Long courseId;
+    private Course course;
     @NotNull(message = "사용자 ID가 누락되었습니다.")
     private Long userId;
     @NotEmpty(message = "리뷰 내용은 누락되거나 빈 칸일 수 없습니다.")
@@ -21,8 +22,8 @@ public class CreateReviewCommand extends SelfValidating<CreateReviewCommand> {
     private LocalDateTime createdTime;
 
     @Builder
-    public CreateReviewCommand(Long courseId, Long userId, String content, LocalDateTime createdTime) {
-        this.courseId = courseId;
+    public CreateReviewCommand(Course course, Long userId, String content, LocalDateTime createdTime) {
+        this.course = course;
         this.userId = userId;
         this.content = content;
         this.createdTime = createdTime;

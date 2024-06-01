@@ -1,11 +1,10 @@
 package ggong_ggong.ridingbud.domain;
 
 import ggong_ggong.ridingbud.application.CreateReviewCommand;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.LocalDateTime;
 
@@ -19,8 +18,11 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long reviewId;
 
+    @JoinColumn(name = "course_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Course course;
     // TODO: ORM
-    private Long courseId;
     private Long userId;
 
     private String content;
@@ -28,7 +30,7 @@ public class Review {
 
     public static Review from(CreateReviewCommand command) {
         return Review.builder()
-                .courseId(command.getCourseId())
+                .course(command.getCourse())
                 .userId(command.getUserId())
                 .content(command.getContent())
                 .createdTime(command.getCreatedTime())
