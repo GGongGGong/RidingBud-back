@@ -1,13 +1,12 @@
 package ggong_ggong.ridingbud.api;
 
 import ggong_ggong.ridingbud.api.req.CreateReviewRequest;
+import ggong_ggong.ridingbud.api.req.RatingCourseRequest;
 import ggong_ggong.ridingbud.api.req.RecommendReviewRequest;
 import ggong_ggong.ridingbud.api.res.FindReviewsResponse;
 import ggong_ggong.ridingbud.api.res.ReviewDto;
-import ggong_ggong.ridingbud.application.CourseService;
-import ggong_ggong.ridingbud.application.CreateReviewCommand;
-import ggong_ggong.ridingbud.application.RecommendReviewCommand;
-import ggong_ggong.ridingbud.application.ReviewService;
+import ggong_ggong.ridingbud.application.*;
+import ggong_ggong.ridingbud.domain.Course;
 import ggong_ggong.ridingbud.domain.RecommendationId;
 import ggong_ggong.ridingbud.domain.User;
 import ggong_ggong.ridingbud.enums.ReviewSortKey;
@@ -30,6 +29,7 @@ public class CommunityController {
     private final ReviewService reviewService;
     private final CourseService courseService;
     private final UserRepository userRepository;
+    private final RateService rateService;
 
     @PostMapping("/reviews")
     public ResponseEntity<?> enrollReview(@RequestBody CreateReviewRequest request) {
@@ -92,5 +92,18 @@ public class CommunityController {
                 RecommendationId.of(userId, recommendation_id)
         );
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PostMapping("/rates")
+    public ResponseEntity<?> ratingCourse(@RequestBody RatingCourseRequest request) {
+        // TODO: AccessToken 에서 UserID 빼오는 코드 작성
+        Long userId = 1L;
+
+        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("존재하지 않는 사용자입니다."));
+        Course course = courseService.getCourseById(request.getCourseId());
+
+        rateService.ratingCourse(user, course, request.getScore());
+
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }
