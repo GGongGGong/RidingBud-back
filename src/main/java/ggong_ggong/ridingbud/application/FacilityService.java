@@ -28,7 +28,10 @@ public class FacilityService {
         return pumpStationRepository.findAll();
     }
 
-    public void saveBicycle(BicycleRental bicycleRental) throws IOException {
+    public void saveBicycle(BicycleRental bicycleRental) {
         bicycleRentalRepository.save(bicycleRental);
+    }
+    public void savePump(PumpStation pumpStation) {
+        pumpStationRepository.save(pumpStation);
     }
 }
