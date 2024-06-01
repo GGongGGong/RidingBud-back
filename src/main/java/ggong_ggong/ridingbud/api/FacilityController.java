@@ -2,6 +2,8 @@ package ggong_ggong.ridingbud.api;
 
 import ggong_ggong.ridingbud.api.res.BicycleRentalDto;
 import ggong_ggong.ridingbud.api.res.FindBicycleRentalsResponse;
+import ggong_ggong.ridingbud.api.res.FindPumpStationsResponse;
+import ggong_ggong.ridingbud.api.res.PumpStationDto;
 import ggong_ggong.ridingbud.application.FacilityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -29,6 +31,19 @@ public class FacilityController {
 
         return ResponseEntity.status(HttpStatus.OK).body(
                 FindBicycleRentalsResponse.of(result)
+        );
+    }
+
+    @GetMapping("/pumps")
+    public ResponseEntity<FindPumpStationsResponse> findPumpStations() {
+
+        List<PumpStationDto> result = facilityService.getPumpStations()
+                .stream()
+                .map(PumpStationDto::from)
+                .collect(Collectors.toList());
+
+        return ResponseEntity.status(HttpStatus.OK).body(
+                FindPumpStationsResponse.of(result)
         );
     }
 }
