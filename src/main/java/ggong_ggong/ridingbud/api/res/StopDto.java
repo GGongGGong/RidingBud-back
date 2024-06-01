@@ -1,4 +1,4 @@
-package ggong_ggong.ridingbud.api;
+package ggong_ggong.ridingbud.api.res;
 
 import ggong_ggong.ridingbud.domain.Stop;
 import ggong_ggong.ridingbud.enums.Type;

@@ -1,6 +1,5 @@
 package ggong_ggong.ridingbud.api.res;
 
-import ggong_ggong.ridingbud.api.StopDto;
 import ggong_ggong.ridingbud.domain.Course;
 import ggong_ggong.ridingbud.enums.Level;
 import lombok.AllArgsConstructor;

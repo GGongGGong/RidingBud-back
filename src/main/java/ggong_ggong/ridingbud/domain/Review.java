@@ -22,8 +22,12 @@ public class Review {
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Course course;
-    // TODO: ORM
-    private Long userId;
+
+
+    @JoinColumn(name = "user_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private User user;
 
     private String content;
     private LocalDateTime createdTime;
@@ -31,7 +35,7 @@ public class Review {
     public static Review from(CreateReviewCommand command) {
         return Review.builder()
                 .course(command.getCourse())
-                .userId(command.getUserId())
+                .user(command.getUser())
                 .content(command.getContent())
                 .createdTime(command.getCreatedTime())
                 .build();
