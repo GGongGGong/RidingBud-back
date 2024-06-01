@@ -1,8 +1,6 @@
 package ggong_ggong.ridingbud.domain;
 
-import ggong_ggong.ridingbud.persistence.CourseRepository;
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.annotations.OnDelete;
@@ -23,10 +21,10 @@ public class FavoriteCourse {
     @JoinColumn(name = "user_id")
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.NO_ACTION)
-    private User user;
+    private Member member;
 
-    public FavoriteCourse(Course course, User user) {
+    public FavoriteCourse(Course course, Member member) {
         this.course = course;
-        this.user = user;
+        this.member = member;
     }
 }

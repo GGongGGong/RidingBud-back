@@ -2,12 +2,9 @@ package ggong_ggong.ridingbud.application;
 
 import ggong_ggong.ridingbud.api.res.CourseListResponse;
 
-import ggong_ggong.ridingbud.api.res.TotalCourseListResponse;
 import ggong_ggong.ridingbud.api.res.StopDto;
 import ggong_ggong.ridingbud.domain.Course;
-import ggong_ggong.ridingbud.domain.Rate;
-import ggong_ggong.ridingbud.domain.Stop;
-import ggong_ggong.ridingbud.domain.User;
+import ggong_ggong.ridingbud.domain.Member;
 import ggong_ggong.ridingbud.enums.Level;
 import ggong_ggong.ridingbud.persistence.*;
 import lombok.RequiredArgsConstructor;
@@ -34,8 +31,8 @@ public class CourseService {
 
     //사용자가 즐겨찾기한 코스 조회
     public List<CourseListResponse> getFavoriteCourses(Long id){
-        User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("유효하지 않은 멤버 입니다."));
-        return favoriteCourseRespository.findAllByUser(user).stream()
+        Member member = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("유효하지 않은 멤버 입니다."));
+        return favoriteCourseRespository.findAllByMember(member).stream()
                 .map(c -> new CourseListResponse(c.getCourse(), getStopsByCourse(c.getCourse()))).toList();
 
     }

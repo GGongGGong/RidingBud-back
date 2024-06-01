@@ -46,7 +46,7 @@ public class ReviewService {
         Optional<Review> targetReview = reviewRepository.findById(command.getReviewId());
         if (targetReview.isEmpty())
             throw new RuntimeException("존재하지 않는 리뷰입니다.");
-        if (targetReview.get().getUser().getUserId().equals(command.getUserId()))
+        if (targetReview.get().getMember().getUserId().equals(command.getUserId()))
             throw new RuntimeException("자신의 리뷰는 추천할 수 없습니다.");
 
         Recommendation recommendation = Recommendation.from(command);
