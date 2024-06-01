@@ -1,7 +1,6 @@
 package ggong_ggong.ridingbud.api;
 
 import ggong_ggong.ridingbud.api.res.CourseListResponse;
-import ggong_ggong.ridingbud.api.res.TotalCourseResponse;
 import ggong_ggong.ridingbud.application.CourseService;
 import ggong_ggong.ridingbud.enums.Level;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +22,15 @@ public class CourseController {
     public List<CourseListResponse> getTotalCourses(
             @RequestParam(value = "level", defaultValue = "BEGINNER") Level level
     ){
+        //TODO auth로 사용자 조회
         return courseService.getTotalCourses(level);
+    }
+
+    //사용자가 즐겨찾기 해둔 코스 조회
+    @GetMapping("/favorites")
+    public List<CourseListResponse> getFavoriteCourse(Long userId){
+//        Long userId = 1L;
+        //TODO auth로 사용자 조회
+        return courseService.getFavoriteCourses(userId);
     }
 }
