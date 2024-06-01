@@ -26,7 +26,7 @@ public class CommunityController {
 
     private final ReviewService reviewService;
 
-    @PostMapping("/review")
+    @PostMapping("/reviews")
     public ResponseEntity<?> enrollReview(@RequestBody CreateReviewRequest request) {
         // TODO: AccessToken 에서 UserID 빼오는 코드 작성
         Long userId = 1L;
