@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/facilities")
+@RequestMapping("/api/facilities")
 public class FacilityController {
     private final FacilityService facilityService;
 
