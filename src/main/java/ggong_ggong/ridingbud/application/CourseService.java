@@ -33,7 +33,7 @@ public class CourseService {
 
     //사용자가 즐겨찾기한 코스 조회
     public List<CourseListResponse> getFavoriteCourses(Long id){
-        User user = userRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+        User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("유효하지 않은 멤버 입니다."));
         return favoriteCourseRespository.findAllByUser(user).stream()
                 .map(c -> new CourseListResponse(c.getCourse(), getStopsByCourse(c.getCourse()))).toList();
 
