@@ -8,7 +8,7 @@ import ggong_ggong.ridingbud.api.res.ReviewDto;
 import ggong_ggong.ridingbud.application.*;
 import ggong_ggong.ridingbud.domain.Course;
 import ggong_ggong.ridingbud.domain.RecommendationId;
-import ggong_ggong.ridingbud.domain.User;
+import ggong_ggong.ridingbud.domain.Member;
 import ggong_ggong.ridingbud.enums.ReviewSortKey;
 import ggong_ggong.ridingbud.persistence.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -36,13 +36,13 @@ public class CommunityController {
         // TODO: AccessToken 에서 UserID 빼오는 코드 작성
         Long userId = 1L;
 
-        User user = userRepository.findById(userId)
+        Member member = userRepository.findById(userId)
                         .orElseThrow(() -> new RuntimeException("존재하지 않는 사용자입니다."));
 
         reviewService.enrollReview(
                 CreateReviewCommand.builder()
                         .course(courseService.getCourseById(request.getCourseId()))
-                        .user(user)
+                        .member(member)
                         .content(request.getContent())
                         .createdTime(LocalDateTime.now())
                         .build()
@@ -99,10 +99,10 @@ public class CommunityController {
         // TODO: AccessToken 에서 UserID 빼오는 코드 작성
         Long userId = 1L;
 
-        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("존재하지 않는 사용자입니다."));
+        Member member = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("존재하지 않는 사용자입니다."));
         Course course = courseService.getCourseById(request.getCourseId());
 
-        rateService.ratingCourse(user, course, request.getScore());
+        rateService.ratingCourse(member, course, request.getScore());
 
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

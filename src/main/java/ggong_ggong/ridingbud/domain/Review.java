@@ -27,7 +27,7 @@ public class Review {
     @JoinColumn(name = "user_id", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private User user;
+    private Member member;
 
     private String content;
     private LocalDateTime createdTime;
@@ -35,7 +35,7 @@ public class Review {
     public static Review from(CreateReviewCommand command) {
         return Review.builder()
                 .course(command.getCourse())
-                .user(command.getUser())
+                .member(command.getMember())
                 .content(command.getContent())
                 .createdTime(command.getCreatedTime())
                 .build();

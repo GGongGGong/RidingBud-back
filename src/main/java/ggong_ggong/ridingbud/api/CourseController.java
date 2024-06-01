@@ -4,6 +4,8 @@ import ggong_ggong.ridingbud.api.res.CourseListResponse;
 import ggong_ggong.ridingbud.api.res.TotalCourseListResponse;
 import ggong_ggong.ridingbud.application.CourseService;
 import ggong_ggong.ridingbud.enums.Level;
+import ggong_ggong.ridingbud.persistence.CourseRepository;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,10 +37,16 @@ public class CourseController {
         return courseService.getFavoriteCourses(userId);
     }
 
-    //별점 순으로 정렬된 코스 목록 반환
+//    //별점 순으로 정렬된 코스 목록 반환
 //    @GetMapping()
 //    public List<TotalCourseListResponse> getCoursesByRate(){
 //        return courseService.getCourseSortByRate();
 //    }
+
+    //코스 조회
+    @GetMapping("/stop")
+    public CourseListResponse getCourse(@RequestParam Long courseId){
+        return courseService.getCourseAndStopById(courseId);
+    }
 
 }

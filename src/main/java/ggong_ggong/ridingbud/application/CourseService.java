@@ -2,11 +2,9 @@ package ggong_ggong.ridingbud.application;
 
 import ggong_ggong.ridingbud.api.res.CourseListResponse;
 
-import ggong_ggong.ridingbud.api.res.TotalCourseListResponse;
 import ggong_ggong.ridingbud.api.res.StopDto;
 import ggong_ggong.ridingbud.domain.Course;
-import ggong_ggong.ridingbud.domain.Rate;
-import ggong_ggong.ridingbud.domain.User;
+import ggong_ggong.ridingbud.domain.Member;
 import ggong_ggong.ridingbud.enums.Level;
 import ggong_ggong.ridingbud.persistence.*;
 import lombok.RequiredArgsConstructor;
@@ -33,8 +31,8 @@ public class CourseService {
 
     //사용자가 즐겨찾기한 코스 조회
     public List<CourseListResponse> getFavoriteCourses(Long id){
-        User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("유효하지 않은 멤버 입니다."));
-        return favoriteCourseRespository.findAllByUser(user).stream()
+        Member member = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("유효하지 않은 멤버 입니다."));
+        return favoriteCourseRespository.findAllByMember(member).stream()
                 .map(c -> new CourseListResponse(c.getCourse(), getStopsByCourse(c.getCourse()))).toList();
 
     }
@@ -48,11 +46,16 @@ public class CourseService {
                 .orElseThrow(() -> new RuntimeException("존재하지 않는 코스입니다."));
     }
 
-//    //별점 순으로 정렬된 코스 반환
+    public CourseListResponse getCourseAndStopById(Long courseId){
+        Course course = courseRepository.findById(courseId).orElseThrow(() -> new RuntimeException("존재하지 않는 코스입니다."));
+        return new CourseListResponse(course,getStopsByCourse(course));
+    }
+
+    //별점 순으로 정렬된 코스 반환
 //    public List<TotalCourseListResponse> getCourseSortByRate(){
 //        List<Course> courseList = courseRepository.findAll();
-//
-////        List<Rate> rateList = rateRepository.findAllByCourse();
+//        List<>
+//        List<Rate> rateList = rateRepository.findAll().stream().filter(new);
 //    }
 
 
