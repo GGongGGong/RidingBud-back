@@ -20,10 +20,10 @@ public class ReviewDto {
     public static ReviewDto of(Tuple tuple) {
         return ReviewDto.builder()
                 .reviewId(tuple.get(0, Long.class))
-                .courseId(tuple.get(2, Long.class))
-                .userId(tuple.get(4, Long.class))
+                .courseId(tuple.get(4, Long.class))
+                .userId(tuple.get(3, Long.class))
                 .content(tuple.get(1, String.class))
-                .createdTime(tuple.get(3, Timestamp.class).toLocalDateTime())
+                .createdTime(tuple.get(2, Timestamp.class).toLocalDateTime())
                 .recommendations(tuple.get(5, Long.class))
                 .build();
     }

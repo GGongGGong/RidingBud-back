@@ -11,9 +11,9 @@ public enum ReviewSortKey {
 
     private final String key;
 
-    public static ReviewSortKey getKey(String key) {
+    public static ReviewSortKey getInstance(String key) {
         for (ReviewSortKey k : ReviewSortKey.values()) {
-            if (k.getKey().equals(key)) {
+            if (k.key.equals(key)) {
                 return k;
             }
         }
