@@ -63,7 +63,7 @@ public class CommunityController {
 
     @GetMapping("/reviews")
     public ResponseEntity<FindReviewsResponse> getReviews(@RequestParam("course_id") Long cid, @RequestParam("sorting") String key) {
-        ReviewSortKey sortKey = ReviewSortKey.getKey(key);
+        ReviewSortKey sortKey = ReviewSortKey.getInstance(key);
         if (sortKey == null)
             throw new RuntimeException("존재하지 않는 정렬키입니다.");
 
