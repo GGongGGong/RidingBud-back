@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class FacilityService {
-    private BicycleRentalRepository bicycleRentalRepository;
+    private final BicycleRentalRepository bicycleRentalRepository;
 
     public List<BicycleRental> getBicycleRentals() {
         return bicycleRentalRepository.findAll();
