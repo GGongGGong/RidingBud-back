@@ -22,6 +22,15 @@ public class CourseController {
     public List<CourseListResponse> getTotalCourses(
             @RequestParam(value = "level", defaultValue = "BEGINNER") Level level
     ){
+        //TODO auth로 사용자 조회
         return courseService.getTotalCourses(level);
+    }
+
+    //사용자가 즐겨찾기 해둔 코스 조회
+    @GetMapping("/favorites")
+    public List<CourseListResponse> getFavoriteCourse(Long userId){
+//        Long userId = 1L;
+        //TODO auth로 사용자 조회
+        return courseService.getFavoriteCourses(userId);
     }
 }
