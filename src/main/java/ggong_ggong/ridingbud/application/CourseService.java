@@ -1,11 +1,14 @@
 package ggong_ggong.ridingbud.application;
 
 import ggong_ggong.ridingbud.api.res.CourseListResponse;
-import ggong_ggong.ridingbud.api.res.StopDto;
+import ggong_ggong.ridingbud.api.StopDto;
 import ggong_ggong.ridingbud.domain.Course;
+import ggong_ggong.ridingbud.domain.User;
 import ggong_ggong.ridingbud.enums.Level;
 import ggong_ggong.ridingbud.persistence.CourseRepository;
+import ggong_ggong.ridingbud.persistence.FavoriteCourseRespository;
 import ggong_ggong.ridingbud.persistence.StopRepository;
+import ggong_ggong.ridingbud.persistence.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +20,8 @@ import java.util.stream.Collectors;
 public class CourseService {
     private final CourseRepository courseRepository;
     private final StopRepository stopRepository;
+    private final FavoriteCourseRespository favoriteCourseRespository;
+    private final UserRepository userRepository;
 
     //코스 레벨별로 조회
     public List<CourseListResponse> getTotalCourses(Level level){
@@ -25,7 +30,15 @@ public class CourseService {
                 .map(c -> new CourseListResponse(c,getStopsByCourse(c))).toList();
     }
 
-    public List<StopDto> getStopsByCourse(Course course){
+    //사용자가 즐겨찾기한 코스 조회
+    public List<CourseListResponse> getFavoriteCourses(Long id){
+        User user = userRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+        return favoriteCourseRespository.findAllByUser(user).stream()
+                .map(c -> new CourseListResponse(c.getCourse(), getStopsByCourse(c.getCourse()))).toList();
+
+    }
+
+    private List<StopDto> getStopsByCourse(Course course){
         return stopRepository.findAllByCourse(course).stream().map(StopDto::new).collect(Collectors.toList());
     }
 
