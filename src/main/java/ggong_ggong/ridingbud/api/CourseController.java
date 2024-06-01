@@ -1,6 +1,7 @@
 package ggong_ggong.ridingbud.api;
 
 import ggong_ggong.ridingbud.api.res.CourseListResponse;
+import ggong_ggong.ridingbud.api.res.TotalCourseListResponse;
 import ggong_ggong.ridingbud.application.CourseService;
 import ggong_ggong.ridingbud.enums.Level;
 import lombok.RequiredArgsConstructor;
@@ -33,4 +34,11 @@ public class CourseController {
         //TODO auth로 사용자 조회
         return courseService.getFavoriteCourses(userId);
     }
+
+    //별점 순으로 정렬된 코스 목록 반환
+//    @GetMapping()
+//    public List<TotalCourseListResponse> getCoursesByRate(){
+//        return courseService.getCourseSortByRate();
+//    }
+
 }

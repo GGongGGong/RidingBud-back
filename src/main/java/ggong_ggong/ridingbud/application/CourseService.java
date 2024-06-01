@@ -1,14 +1,14 @@
 package ggong_ggong.ridingbud.application;
 
 import ggong_ggong.ridingbud.api.res.CourseListResponse;
+
+import ggong_ggong.ridingbud.api.res.TotalCourseListResponse;
 import ggong_ggong.ridingbud.api.res.StopDto;
 import ggong_ggong.ridingbud.domain.Course;
+import ggong_ggong.ridingbud.domain.Rate;
 import ggong_ggong.ridingbud.domain.User;
 import ggong_ggong.ridingbud.enums.Level;
-import ggong_ggong.ridingbud.persistence.CourseRepository;
-import ggong_ggong.ridingbud.persistence.FavoriteCourseRespository;
-import ggong_ggong.ridingbud.persistence.StopRepository;
-import ggong_ggong.ridingbud.persistence.UserRepository;
+import ggong_ggong.ridingbud.persistence.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +22,7 @@ public class CourseService {
     private final StopRepository stopRepository;
     private final FavoriteCourseRespository favoriteCourseRespository;
     private final UserRepository userRepository;
+    private final RateRepository rateRepository;
 
     //코스 레벨별로 조회
     public List<CourseListResponse> getTotalCourses(Level level){
@@ -46,6 +47,14 @@ public class CourseService {
         return courseRepository.findById(courseId)
                 .orElseThrow(() -> new RuntimeException("존재하지 않는 코스입니다."));
     }
+
+//    //별점 순으로 정렬된 코스 반환
+//    public List<TotalCourseListResponse> getCourseSortByRate(){
+//        List<Course> courseList = courseRepository.findAll();
+//
+////        List<Rate> rateList = rateRepository.findAllByCourse();
+//    }
+
 
 }
 
