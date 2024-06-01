@@ -8,7 +8,7 @@ import ggong_ggong.ridingbud.application.CreateReviewCommand;
 import ggong_ggong.ridingbud.application.RecommendReviewCommand;
 import ggong_ggong.ridingbud.application.ReviewService;
 import ggong_ggong.ridingbud.domain.RecommendationId;
-import ggong_ggong.ridingbud.domain.ReviewSortKey;
+import ggong_ggong.ridingbud.enums.ReviewSortKey;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

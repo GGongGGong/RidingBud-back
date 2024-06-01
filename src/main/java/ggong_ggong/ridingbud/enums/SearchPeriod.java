@@ -1,4 +1,4 @@
-package ggong_ggong.ridingbud.domain;
+package ggong_ggong.ridingbud.enums;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
