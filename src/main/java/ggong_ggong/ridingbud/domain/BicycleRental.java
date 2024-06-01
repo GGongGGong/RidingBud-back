@@ -22,5 +22,5 @@ public class BicycleRental {
     private Short remainder;
     private String operationTime;
     private String detailLocation;
-    private String call;
+    private String contact;
 }

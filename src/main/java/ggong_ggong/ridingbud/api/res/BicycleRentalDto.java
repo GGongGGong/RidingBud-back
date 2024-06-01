@@ -29,7 +29,7 @@ public class BicycleRentalDto {
                 .remainder(bicycleRental.getRemainder())
                 .operationTime(bicycleRental.getOperationTime())
                 .detailLocation(bicycleRental.getDetailLocation())
-                .call(bicycleRental.getCall())
+                .call(bicycleRental.getContact())
                 .build();
     }
 }
