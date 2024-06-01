@@ -9,7 +9,9 @@ import ggong_ggong.ridingbud.application.CreateReviewCommand;
 import ggong_ggong.ridingbud.application.RecommendReviewCommand;
 import ggong_ggong.ridingbud.application.ReviewService;
 import ggong_ggong.ridingbud.domain.RecommendationId;
+import ggong_ggong.ridingbud.domain.User;
 import ggong_ggong.ridingbud.enums.ReviewSortKey;
+import ggong_ggong.ridingbud.persistence.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -27,16 +29,20 @@ public class CommunityController {
 
     private final ReviewService reviewService;
     private final CourseService courseService;
+    private final UserRepository userRepository;
 
     @PostMapping("/reviews")
     public ResponseEntity<?> enrollReview(@RequestBody CreateReviewRequest request) {
         // TODO: AccessToken 에서 UserID 빼오는 코드 작성
         Long userId = 1L;
 
+        User user = userRepository.findById(userId)
+                        .orElseThrow(() -> new RuntimeException("존재하지 않는 사용자입니다."));
+
         reviewService.enrollReview(
                 CreateReviewCommand.builder()
                         .course(courseService.getCourseById(request.getCourseId()))
-                        .userId(userId)
+                        .user(user)
                         .content(request.getContent())
                         .createdTime(LocalDateTime.now())
                         .build()
