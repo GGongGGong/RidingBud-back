@@ -10,18 +10,18 @@ import java.util.List;
 
 public interface ReviewRepository extends JpaRepository<Review, Long> {
     @Query(value = """
-            select rev.*, rec.cnt
-            from Review rev join (select review_id, count(*) as cnt from recommendation group by review_id) as rec
-            where rev.review_id = rec.review_id and course_id = :cid
-            order by rev.created_time""",
-            nativeQuery = true)
+        select rev.*, rec.cnt
+        from Review rev join (select review_id, count(*) as cnt from recommendation group by review_id) as rec
+        where rev.review_id = rec.review_id and course_id = :cid
+        order by rev.created_time""",
+        nativeQuery = true)
     List<Tuple> findAllByCourseIdOrderByCreatedTimeDesc(@Param("cid") Long courseId);
 
     @Query(value = """
-            select rev.*, rec.cnt
-            from Review rev join (select review_id, count(*) as cnt from recommendation group by review_id) as rec
-            where rev.review_id = rec.review_id and course_id = :cid
-            order by rec.cnt""",
+        select rev.*, rec.cnt
+        from Review rev join (select review_id, count(*) as cnt from recommendation group by review_id) as rec
+        where rev.review_id = rec.review_id and course_id = :cid
+        order by rec.cnt""",
         nativeQuery = true)
     List<Tuple> findAllByCourseIdOrderByRecommendation(@Param("cid") Long courseId);
 }
