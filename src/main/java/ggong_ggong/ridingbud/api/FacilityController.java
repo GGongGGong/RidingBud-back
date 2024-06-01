@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 public class FacilityController {
     private final FacilityService facilityService;
 
-    @GetMapping("bicycles")
+    @GetMapping("/bicycles")
     public ResponseEntity<FindBicycleRentalsResponse> findBicycleRentals() {
 
         List<BicycleRentalDto> result = facilityService.getBicycleRentals()
