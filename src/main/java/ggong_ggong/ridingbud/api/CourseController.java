@@ -1,6 +1,7 @@
 package ggong_ggong.ridingbud.api;
 
 import ggong_ggong.ridingbud.api.res.CourseListResponse;
+import ggong_ggong.ridingbud.api.res.TotalCourseResponse;
 import ggong_ggong.ridingbud.application.CourseService;
 import ggong_ggong.ridingbud.enums.Level;
 import lombok.RequiredArgsConstructor;
