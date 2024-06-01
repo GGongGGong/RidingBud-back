@@ -6,6 +6,7 @@ import ggong_ggong.ridingbud.api.res.TotalCourseListResponse;
 import ggong_ggong.ridingbud.api.res.StopDto;
 import ggong_ggong.ridingbud.domain.Course;
 import ggong_ggong.ridingbud.domain.Rate;
+import ggong_ggong.ridingbud.domain.Stop;
 import ggong_ggong.ridingbud.domain.User;
 import ggong_ggong.ridingbud.enums.Level;
 import ggong_ggong.ridingbud.persistence.*;
@@ -48,11 +49,16 @@ public class CourseService {
                 .orElseThrow(() -> new RuntimeException("존재하지 않는 코스입니다."));
     }
 
-//    //별점 순으로 정렬된 코스 반환
+    public CourseListResponse getCourseAndStopById(Long courseId){
+        Course course = courseRepository.findById(courseId).orElseThrow(() -> new RuntimeException("존재하지 않는 코스입니다."));
+        return new CourseListResponse(course,getStopsByCourse(course));
+    }
+
+    //별점 순으로 정렬된 코스 반환
 //    public List<TotalCourseListResponse> getCourseSortByRate(){
 //        List<Course> courseList = courseRepository.findAll();
-//
-////        List<Rate> rateList = rateRepository.findAllByCourse();
+//        List<>
+//        List<Rate> rateList = rateRepository.findAll().stream().filter(new);
 //    }
 
 
